@@ -12,29 +12,29 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    public function showRegistrationPage(): View
-    {
-        return view('pages.auth.registration');
-    }
+    // public function showRegistrationPage(): View
+    // {
+    //     return view('pages.auth.registration');
+    // }
 
     public function showLoginPage(): View
     {
-        return view('pages.auth.login');
+        return view('pages.dashboard.auth.sign-in-page');
     }
 
     public function showSendOTPPage(): View
     {
-        return view('pages.auth.otp-send');
+        return view('pages.dashboard.auth.send-otp-page');
     }
 
     public function showVerifyOTPPage(): View
     {
-        return view('pages.auth.otp-verify');
+        return view('pages.dashboard.auth.otp-verify');
     }
 
     public function showResetPasswordPage(): View
     {
-        return view('pages.auth.password-reset');
+        return view('pages.dashboard.auth.password-reset');
     }
 
 

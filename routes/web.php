@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get("/", [HomeController::class, "showHomePage"])->name("home.index");
+Route::get("/user/sign-in", [UserController::class, "showLoginPage"])->name("user.login");
+
 Route::get("/user/register", [UserController::class, "showRegistrationPage"])->name("user.register");
-Route::get("/user/login", [UserController::class, "showLoginPage"])->name("user.login");
 Route::get("/user/send-otp", [UserController::class, "showSendOTPPage"])->name("user.send-otp");
 Route::get("/user/verify-otp", [UserController::class, "showVerifyOTPPage"])->name("user.verify-otp")->middleware("verifyOtpSend");
 Route::get("/user/reset-password", [UserController::class, "showResetPasswordPage"])->name("user.reset-password")->middleware("verifyJwtToken");
@@ -56,7 +57,14 @@ Route::middleware("authCheck")->group(function () {
 });
 
 
-
+Route::get("/reset-password", function () {
+    // return view("pages.auth.password-reset");
+    return view("pages.dashboard.auth.password-reset");
+});
+Route::get("/reset-password2", function () {
+    return view("pages.auth.password-reset");
+    // return view("pages.dashboard.auth.password-reset");
+});
 
 
 
