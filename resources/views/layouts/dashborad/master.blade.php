@@ -6,24 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin Dashboard</title>
+
     <!-- core:css -->
     <link rel="stylesheet" href="{{ asset('assets') }}/dashboard/vendors/core/core.css">
     <!-- endinject -->
+
     <!-- plugin css for this page -->
     <link rel="stylesheet"
         href="{{ asset('assets') }}/dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
     <!-- end plugin css for this page -->
+
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('assets') }}/dashboard/fonts/feather-font/css/iconfont.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/dashboard/vendors/flag-icon-css/css/flag-icon.min.css">
     <!-- endinject -->
+
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('assets') }}/dashboard/css/demo_1/style.css">
     <!-- End layout styles -->
+
+    <!-- include css -->
+    <link rel="stylesheet" href="{{ asset('assets/dashboard/css/include/progress.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dashboard/css/include/toastify.min.css') }}">
+
     {{-- <link rel="shortcut icon" href="{{ asset('assets') }}/dashboard/images/favicon.png" /> --}}
 </head>
 
 <body>
+    <!-- progress bar -->
+    <div id="loader" class="LoadingOverlay d-none">
+        <div class="Line-Progress">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
+
     <div class="main-wrapper">
 
         <!-- partial:partials/_sidebar.html -->
@@ -42,10 +58,32 @@
                 <ul class="nav">
                     <li class="nav-item nav-category">Main</li>
                     <li class="nav-item">
-                        <a href="{{ route("dashboard") }}" class="nav-link">
+                        <a href="{{ route('dashboard') }}" class="nav-link">
                             <i class="link-icon" data-feather="box"></i>
                             <span class="link-title">Dashboard</span>
                         </a>
+                    </li>
+                    <li class="nav-item nav-category">Website Management</li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#about" role="button" aria-expanded="false"
+                            aria-controls="about">
+                            <i class="link-icon" data-feather="users"></i>
+                            <span class="link-title">About Us</span>
+                            <i class="link-arrow" data-feather="chevron-down"></i>
+                        </a>
+                        <div class="collapse" id="about">
+                            <ul class="nav sub-menu">
+                                <li class="nav-item">
+                                    <a href="{{ route("about-us.index") }}" class="nav-link">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">Stats</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">Team</a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     {{-- <li class="nav-item nav-category">web apps</li>
                     <li class="nav-item">
@@ -627,7 +665,7 @@
                                             </a>
                                         </li> --}}
                                         <li class="nav-item">
-                                            <a href="javascript:;" class="nav-link">
+                                            <a href="{{ route('user.profile') }}" class="nav-link">
                                                 <i data-feather="edit"></i>
                                                 <span>Edit Profile</span>
                                             </a>
@@ -639,7 +677,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{{ route("user.logout") }}" class="nav-link">
+                                            <a href="{{ route('user.logout') }}" class="nav-link">
                                                 <i data-feather="log-out"></i>
                                                 <span>Log Out</span>
                                             </a>
@@ -654,14 +692,15 @@
             <!-- partial -->
 
             <div class="page-content">
-                @yield("content")
+                @yield('content')
             </div>
 
             <!-- partial:partials/_footer.html -->
             <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
-                <p class="text-muted text-center text-md-left">Copyright © 2024{{-- <a href="https://rndglobalnest.com/" target="_blank">RND Global Nest</a> --}}. All rights reserved</p>
-                <p class="text-muted text-center text-md-left mb-0 d-none d-md-block"><a href="https://rndglobalnest.com/"
-                    target="_blank">RND Global Nest</a> <i
+                <p class="text-muted text-center text-md-left">Copyright © 2024{{-- <a href="https://rndglobalnest.com/" target="_blank">RND Global Nest</a> --}}. All rights
+                    reserved</p>
+                <p class="text-muted text-center text-md-left mb-0 d-none d-md-block"><a
+                        href="https://rndglobalnest.com/" target="_blank">RND Global Nest</a> <i
                         class="mb-1 text-primary ml-1 icon-small" data-feather="heart"></i></p>
             </footer>
             <!-- partial -->
@@ -669,9 +708,18 @@
 
     </div>
 
+    <!-- script -->
+
+    <!-- include js -->
+    <script src="{{ asset('assets/dashboard/js/include/config.js') }}"></script>
+    <script src="{{ asset('assets/dashboard/js/include/axios.min.js') }}"></script>
+    <script src="{{ asset('assets/dashboard/js/include/toastify-js.js') }}"></script>
+    @yield('script')
+
     <!-- core:js -->
     <script src="{{ asset('assets') }}/dashboard/vendors/core/core.js"></script>
     <!-- endinject -->
+
     <!-- plugin js for this page -->
     <script src="{{ asset('assets') }}/dashboard/vendors/chartjs/Chart.min.js"></script>
     <script src="{{ asset('assets') }}/dashboard/vendors/jquery.flot/jquery.flot.js"></script>
@@ -680,10 +728,12 @@
     <script src="{{ asset('assets') }}/dashboard/vendors/apexcharts/apexcharts.min.js"></script>
     <script src="{{ asset('assets') }}/dashboard/vendors/progressbar.js/progressbar.min.js"></script>
     <!-- end plugin js for this page -->
+
     <!-- inject:js -->
     <script src="{{ asset('assets') }}/dashboard/vendors/feather-icons/feather.min.js"></script>
     <script src="{{ asset('assets') }}/dashboard/js/template.js"></script>
     <!-- endinject -->
+
     <!-- custom js for this page -->
     <script src="{{ asset('assets') }}/dashboard/js/dashboard.js"></script>
     <script src="{{ asset('assets') }}/dashboard/js/datepicker.js"></script>

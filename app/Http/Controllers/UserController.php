@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helper\JWTToken;
 use App\Mail\OTP;
-use App\Models\User;
+use App\Models\Admin;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -38,49 +38,45 @@ class UserController extends Controller
     }
 
 
-    public function userRegistration(Request $request)
+    // public function userRegistration(Request $request)
+    // {
+    //     // $request->validate([
+    //     //     'username' => ['required', 'string', 'max:255'],
+    //     //     'name' => ['required', 'string', 'max:255'],
+    //     //     'phone' => ['required', 'string', 'max:255'],
+    //     //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+    //     //     'password' => ['required', 'string', 'min:8'],
+    //     // ]);
+
+    //     try {
+    //         User::create($request->all());
+    //         return response()->json([
+    //             'status' => 'success',
+    //             'url' => route('user.login'),
+    //             'message' => 'User registered successfully.'
+    //         ], 200);
+
+    //         // } catch (Exception $th) {
+    //     } catch (\Throwable $th) {
+    //         return response()->json([
+    //             'status' => 'failed',
+    //             'message' => 'User registration failed.',
+    //             // 'error' => $th->getMessage(),
+    //         ], 200);
+    //     }
+    // }
+
+
+
+
+    // Admin Login
+    public function logIn(Request $request)
     {
-        // $request->validate([
-        //     'username' => ['required', 'string', 'max:255'],
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'phone' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        //     'password' => ['required', 'string', 'min:8'],
-        // ]);
+        $admin = Admin::where('email', $request->input('email'))->where('password', $request->input('password'))->first();
 
-        try {
-            User::create($request->all());
-            return response()->json([
-                'status' => 'success',
-                'url' => route('user.login'),
-                'message' => 'User registered successfully.'
-            ], 200);
-
-            // } catch (Exception $th) {
-        } catch (\Throwable $th) {
-            return response()->json([
-                'status' => 'failed',
-                'message' => 'User registration failed.',
-                // 'error' => $th->getMessage(),
-            ], 200);
-        }
-    }
-
-
-
-    public function userLogin(Request $request)
-    {
-        // $request->validate([
-        //     'email' => ['required', 'string', 'email', 'max:255'],
-        //     'password' => ['required', 'string', 'min:8'],
-        // ]);
-
-
-        $user = User::where('email', $request->email)->where('password', $request->password)->first();
-
-        if ($user) {
+        if ($admin) {
             // Issue Token for 1 hour
-            $token = JWTToken::generateToken($request->input('email'), $user->id, 60 * 60);
+            $token = JWTToken::generateToken($request->input('email'), $admin->id, 60 * 60);
 
 
             return response()->json([
@@ -101,8 +97,8 @@ class UserController extends Controller
     // Send OTP for forget password
     public function sendOTP(Request $request)
     {
-        $user = $request->email;
-        $check = User::where('email', $user)->first();
+        $admin = $request->input("email");
+        $check = Admin::where('email', $admin)->first();
 
         if ($check) {
 
@@ -112,14 +108,14 @@ class UserController extends Controller
             $check->update(['otp' => $otp]);
 
             //send otp
-            Mail::to($user)->send(new OTP($otp));
+            Mail::to($admin)->send(new OTP($otp));
 
 
             return response()->json([
                 'status' => 'success',
                 'url' => route('user.verify-otp'),
                 'message' => 'OTP sent successfully.'
-            ], 200)->header('X-User-Email', $user)->cookie('userEmail', $user, 5);
+            ], 200)->header('X-User-Email', $admin)->cookie('userEmail', $admin, 5);
         } else {
             return response()->json([
                 'status' => 'failed',
@@ -136,7 +132,7 @@ class UserController extends Controller
         $otp = $request->input('otp');
 
         if ($userEmail) {
-            $check = User::where('email', $userEmail)->where('otp', $otp)->first();
+            $check = Admin::where('email', $userEmail)->where('otp', $otp)->first();
             if ($check) {
                 $expirytime = $check->updated_at->addMinute(); // Set the expiry time to 1 minute after updated_at
                 // $expirytime = $check->updated_at->addMinutes(3); // Set the expiry time to 3 minute after updated_at
@@ -186,13 +182,13 @@ class UserController extends Controller
 
 
         // $user = User::where('email', $email)->where('id', $id)->first();
-        $user = User::where('email', $email)->first();
+        $user = Admin::where('email', $email)->first();
 
         try {
             // if ($user) {
 
             $user->update([
-                'password' => $request->password
+                'password' => $request->input('password'),
             ]);
             return response()->json([
                 'status' => 'success',
@@ -220,9 +216,4 @@ class UserController extends Controller
     {
         return redirect(route('user.login'))->cookie('logInToken', null, -1);
     }
-
-
-
-
-
 }

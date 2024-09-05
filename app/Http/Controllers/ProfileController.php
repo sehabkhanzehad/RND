@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Models\User;
 
 
 class ProfileController extends Controller
@@ -18,7 +18,7 @@ class ProfileController extends Controller
         try {
             $email = $request->header('email');
             $id = $request->header('id');
-            $user = User::where('email', $email)->where('id', $id)->first();
+            $user = Admin::where('email', $email)->where('id', $id)->first();
             return response()->json([
                 'status' => 'success',
                 'data' => $user
@@ -31,23 +31,20 @@ class ProfileController extends Controller
         }
     }
 
-    public function updateProfile(Request $request)
+    public function updateProfileInfo(Request $request)
     {
         try {
             $email = $request->header('email');
             $id = $request->header('id');
 
-            $firstName = $request->input('firstName');
-            $lastName = $request->input('lastName');
-            $password = $request->input('password');
+            $name = $request->input('name');
+            // $email = $request->input('email');
 
-            $user = User::where('email', $email)->where('id', $id)->first();
+            $user = Admin::where('email', $email)->where('id', $id)->first();
 
             $user->update([
-                'firstName' => $firstName,
-                'lastName' => $lastName,
-                'password' => $password,
-                'mobile' => $request->input('mobile'),
+                'name' => $name,
+                // 'email' => $email,
             ]);
             return response()->json([
                 'status' => 'success',
@@ -59,5 +56,47 @@ class ProfileController extends Controller
                 'message' => 'Something went wrong. Please try again.',
             ], 500);
         }
+    }
+
+    public function updateProfilePicture(Request $request)
+    {
+    //     try {
+    //         $email = $request->header('email');
+    //         $id = $request->header('id');
+    //         $user = User::where('email', $email)->where('id', $id)->first();
+    //         $user->update([
+    //             'profile_picture' => $request->profile_picture
+    //         ]);
+    //         return response()->json([
+    //             'status' => 'success',
+    //             'message' => 'Profile picture updated successfully.',
+    //         ]);
+    //     } catch (\Throwable $th) {
+    //         return response()->json([
+    //             'status' => 'failed',
+    //             'message' => 'Something went wrong. Please try again.',
+    //         ], 500);
+    //     }
+    }
+
+    public function UpdatePassword(Request $request)
+    {
+        // try {
+        //     $email = $request->header('email');
+        //     $id = $request->header('id');
+        //     $user = User::where('email', $email)->where('id', $id)->first();
+        //     $user->update([
+        //         'password' => $request->password
+        //     ]);
+        //     return response()->json([
+        //         'status' => 'success',
+        //         'message' => 'Password updated successfully.',
+        //     ]);
+        // } catch (\Throwable $th) {
+        //     return response()->json([
+        //         'status' => 'failed',
+        //         'message' => 'Something went wrong. Please try again.',
+        //     ], 500);
+        // }
     }
 }

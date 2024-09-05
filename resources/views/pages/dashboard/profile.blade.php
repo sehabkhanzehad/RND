@@ -1,56 +1,45 @@
-@extends('layouts.sidenav')
+@extends('layouts.dashborad.master')
 @section('content')
     @include('components.dashboard.profile-form')
 @endsection
 
-@section('scripts')
+
+
+
+@section('script')
     <script>
         getUserDetails();
+        
         async function getUserDetails() {
             showLoader();
             const response = await axios.get("{{ route('user.details') }}");
             hideLoader();
 
             if (response.data.status == "success") {
+                document.getElementById('name').value = response.data.data.name;
                 document.getElementById('email').value = response.data.data.email;
-                document.getElementById('firstName').value = response.data.data.firstName;
-                document.getElementById('lastName').value = response.data.data.lastName;
-                document.getElementById('mobile').value = response.data.data.mobile;
-                document.getElementById('password').value = response.data.data.password;
             } else {
                 errorToast(response.data.message);
             }
         }
 
 
-        async function update() {
+        async function updateInfo() {
 
             // let email = document.getElementById('email').value;
-            let firstName = document.getElementById('firstName').value;
-            let lastName = document.getElementById('lastName').value;
-            let mobile = document.getElementById("mobile").value;
-            let password = document.getElementById("password").value;
+            let name = document.getElementById('name').value;
 
 
-            if (email == "" && firstName == "" && lastName == "" && mobile == "" && password == "") {
-                errorToast("Please enter your details");
+            if (email == "" && name == "") {
+                errorToast("Please enter your information");
             } else if (email == "") {
                 errorToast("Please enter your email.");
-            } else if (firstName == "") {
-                errorToast("Please enter your first name.");
-            } else if (lastName == "") {
-                errorToast("Please enter your last name.");
-            } else if (mobile == "") {
-                errorToast("Please enter your mobile number.");
-            } else if (password == "") {
-                errorToast("Please enter your password.");
+            } else if (name == "") {
+                errorToast("Please enter your name.");
             } else {
                 showLoader();
-                const response = await axios.post("{{ route('profile.update') }}", {
-                    firstName: firstName,
-                    lastName: lastName,
-                    mobile: mobile,
-                    password: password
+                const response = await axios.post("{{ route('profile.update.info') }}", {
+                    name: name,
                 });
                 hideLoader();
 
