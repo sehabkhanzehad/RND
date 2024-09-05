@@ -28,8 +28,15 @@
     <!-- include css -->
     <link rel="stylesheet" href="{{ asset('assets/dashboard/css/include/progress.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dashboard/css/include/toastify.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/dashboard/css/include/jquery.dataTables.min.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset("assets") }}/dashboard/vendors/bootstrap-icons/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
+
 
     {{-- <link rel="shortcut icon" href="{{ asset('assets') }}/dashboard/images/favicon.png" /> --}}
+
+
 </head>
 
 <body>
@@ -74,7 +81,7 @@
                         <div class="collapse" id="about">
                             <ul class="nav sub-menu">
                                 <li class="nav-item">
-                                    <a href="{{ route("about-us.index") }}" class="nav-link">About</a>
+                                    <a href="{{ route('about-us.index') }}" class="nav-link">About</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="" class="nav-link">Stats</a>
@@ -709,6 +716,9 @@
     </div>
 
     <!-- script -->
+    {{-- JQuery --}}
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
 
     <!-- include js -->
     <script src="{{ asset('assets/dashboard/js/include/config.js') }}"></script>
@@ -721,12 +731,14 @@
     <!-- endinject -->
 
     <!-- plugin js for this page -->
-    <script src="{{ asset('assets') }}/dashboard/vendors/chartjs/Chart.min.js"></script>
-    <script src="{{ asset('assets') }}/dashboard/vendors/jquery.flot/jquery.flot.js"></script>
-    <script src="{{ asset('assets') }}/dashboard/vendors/jquery.flot/jquery.flot.resize.js"></script>
+    {{-- <script src="{{ asset('assets') }}/dashboard/vendors/chartjs/Chart.min.js"></script> --}}
+    {{-- <script src="{{ asset('assets') }}/dashboard/vendors/jquery.flot/jquery.flot.js"></script>
+    <script src="{{ asset('assets') }}/dashboard/vendors/jquery.flot/jquery.flot.resize.js"></script> --}}
     <script src="{{ asset('assets') }}/dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-    <script src="{{ asset('assets') }}/dashboard/vendors/apexcharts/apexcharts.min.js"></script>
-    <script src="{{ asset('assets') }}/dashboard/vendors/progressbar.js/progressbar.min.js"></script>
+    {{-- <script src="{{ asset('assets') }}/dashboard/vendors/apexcharts/apexcharts.min.js"></script> --}}
+    {{-- <script src="{{ asset('assets') }}/dashboard/vendors/progressbar.js/progressbar.min.js"></script> --}}
+    {{-- <script src="{{ asset('assets') }}/dashboard/vendors/datatables.net/jquery.dataTables.js"></script>
+    <script src="{{ asset('assets') }}/dashboard/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script> --}}
     <!-- end plugin js for this page -->
 
     <!-- inject:js -->
@@ -737,6 +749,7 @@
     <!-- custom js for this page -->
     <script src="{{ asset('assets') }}/dashboard/js/dashboard.js"></script>
     <script src="{{ asset('assets') }}/dashboard/js/datepicker.js"></script>
+    {{-- <script src="{{ asset('assets') }}/dashboard/js/data-table.js"></script> --}}
     <!-- end custom js for this page -->
 </body>
 

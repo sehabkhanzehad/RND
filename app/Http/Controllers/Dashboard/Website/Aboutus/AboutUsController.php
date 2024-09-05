@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard\Website;
+namespace App\Http\Controllers\Dashboard\Website\Aboutus;
 
 use App\Http\Controllers\Controller;
 use App\Models\AboutUs;
@@ -56,16 +56,15 @@ class AboutUsController extends Controller
                     "video_link" => $videoLink,
                     "image" => $imageUrl,
                 ]);
-
             } else {
-                 // Upload New Image
-                 $image = $request->file("image");
-                 $videoLink = $request->input("video_link");
-                 $description = $request->input("description");
+                // Upload New Image
+                $image = $request->file("image");
+                $videoLink = $request->input("video_link");
+                $description = $request->input("description");
 
-                 $imageName = uniqid() . "_about_us" . "." . $image->getClientOriginalExtension();
-                 $image->move(public_path('uploads/about-us/'), $imageName);
-                 $imageUrl = asset("uploads/about-us/" . $imageName);
+                $imageName = uniqid() . "_about_us" . "." . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads/about-us/'), $imageName);
+                $imageUrl = asset("uploads/about-us/" . $imageName);
 
                 AboutUs::create([
                     "description" => $description,

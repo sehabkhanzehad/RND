@@ -44,11 +44,11 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="index.html" class="active">Home<br></a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li class="dropdown"><a href="#"><span>Dropdown</span> <i
+                    <li><a href="{{ route("home.index") }}" class="active">Home<br></a></li>
+                    <li><a href="{{ route("home.about") }}">About</a></li>
+                    <li><a href="{{ route("home.service") }}">Services</a></li>
+                    <li><a href="{{ route("home.pricing") }}">Pricing</a></li>
+                    {{-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="#">Dropdown 1</a></li>
@@ -66,22 +66,20 @@
                             <li><a href="#">Dropdown 3</a></li>
                             <li><a href="#">Dropdown 4</a></li>
                         </ul>
-                    </li>
-                    <li><a href="contact.html">Contact</a></li>
+                    </li> --}}
+                    <li><a href="{{ route("home.contact") }}">Contact</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted" href="get-a-quote.html">Get a Quote</a>
+            {{-- <a class="btn-getstarted" href="get-a-quote.html">Get a Quote</a> --}}
             <a class="btn-getstarted" target="_blank" href="{{ route('user.login') }}">Temp Sign In</a>
 
         </div>
     </header>
 
     <main class="main">
-
         @yield('content')
-
     </main>
 
     <footer id="footer" class="footer dark-background">

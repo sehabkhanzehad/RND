@@ -1,0 +1,9 @@
+@extends('layouts.homepage.master')
+@section('content')
+    @include('components.homepage.services.page-title')
+    @include("components.homepage.services.featured-services")
+    @include("components.homepage.services.services")
+    @include("components.homepage.services.features")
+    @include('components.homepage.testimonial')
+    @include("components.homepage.faq")
+@endsection
