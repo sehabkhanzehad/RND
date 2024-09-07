@@ -79,9 +79,9 @@
                         </a>
                         <div class="collapse" id="about">
                             <ul class="nav sub-menu">
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{ route('about-us.index') }}" class="nav-link">About</a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a href="{{ route('stats.index') }}" class="nav-link">Stats</a>
                                 </li>
@@ -103,12 +103,12 @@
                                 <li class="nav-item">
                                     <a href="{{ route("service.index") }}" class="nav-link">Our Service</a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="" class="nav-link">Fetured Service</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="" class="nav-link">Features</a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     </li>
