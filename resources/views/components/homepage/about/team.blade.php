@@ -11,30 +11,28 @@
     <div class="container">
 
         <div class="row">
-
-            <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
-                <div class="member">
-                    <img src="{{ asset("assets") }}/homepage/img/team/team-1.jpg" class="img-fluid" alt="">
-                    <div class="member-content">
-                        <h4>Walter White</h4>
-                        <span>Web Development</span>
-                        <p>
-                            Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis quaerat
-                            qui aut aut aut
-                        </p>
-                        <div class="social">
-                            <a href=""><i class="bi bi-twitter-x"></i></a>
-                            <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
-                            <a href=""><i class="bi bi-linkedin"></i></a>
+            @foreach ($team as $person)
+                <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+                    <div class="member">
+                        <img src="{{ $person->image }}" class="img-fluid" alt="">
+                        <div class="member-content">
+                            <h4>{{ $person->name }}</h4>
+                            <span>{{ $person->designation }}</span>
+                            <p>{{ $person->description }}</p>
+                            <div class="social">
+                                <a href="{{ $person->linkedin_link }}"><i class="bi bi-linkedin"></i></a>
+                                <a href="{{ $person->github_link }}"><i class="bi bi-github"></i></a>
+                                <a href="{{ $person->facebook_link }}"><i class="bi bi-facebook"></i></a>
+                                <a href="//wa.me/{{ $person->whatsapp_link }}"><i class="bi bi-whatsapp"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div><!-- End Team Member -->
+                </div><!-- End Team Member -->
+            @endforeach
 
-            <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
+            {{-- <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
                 <div class="member">
-                    <img src="{{ asset("assets") }}/homepage/img/team/team-2.jpg" class="img-fluid" alt="">
+                    <img src="{{ asset('assets') }}/homepage/img/team/team-2.jpg" class="img-fluid" alt="">
                     <div class="member-content">
                         <h4>Sarah Jhinson</h4>
                         <span>Marketing</span>
@@ -43,10 +41,10 @@
                             temporibus
                         </p>
                         <div class="social">
-                            <a href=""><i class="bi bi-twitter-x"></i></a>
-                            <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
                             <a href=""><i class="bi bi-linkedin"></i></a>
+                            <a href=""><i class="bi bi-github"></i></a>
+                            <a href=""><i class="bi bi-facebook"></i></a>
+                            <a href=""><i class="bi bi-whatsapp"></i></a>
                         </div>
                     </div>
                 </div>
@@ -54,7 +52,7 @@
 
             <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
                 <div class="member">
-                    <img src="{{ asset("assets") }}/homepage/img/team/team-3.jpg" class="img-fluid" alt="">
+                    <img src="{{ asset('assets') }}/homepage/img/team/team-3.jpg" class="img-fluid" alt="">
                     <div class="member-content">
                         <h4>William Anderson</h4>
                         <span>Content</span>
@@ -63,14 +61,14 @@
                             des clara
                         </p>
                         <div class="social">
-                            <a href=""><i class="bi bi-twitter-x"></i></a>
-                            <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
                             <a href=""><i class="bi bi-linkedin"></i></a>
+                            <a href=""><i class="bi bi-github"></i></a>
+                            <a href=""><i class="bi bi-facebook"></i></a>
+                            <a href=""><i class="bi bi-whatsapp"></i></a>
                         </div>
                     </div>
                 </div>
-            </div><!-- End Team Member -->
+            </div><!-- End Team Member --> --}}
 
         </div>
 

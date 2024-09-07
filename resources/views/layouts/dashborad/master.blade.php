@@ -8,33 +8,32 @@
     <title>Admin Dashboard</title>
 
     <!-- core:css -->
-    <link rel="stylesheet" href="{{ asset('assets') }}/dashboard/vendors/core/core.css">
+    <link rel="stylesheet" href="{{ asset('assets/dashboard/vendors/core/core.css') }}">
     <!-- endinject -->
 
     <!-- plugin css for this page -->
     <link rel="stylesheet"
-        href="{{ asset('assets') }}/dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+        href="{{ asset('assets/dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dashboard/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
     <!-- end plugin css for this page -->
 
     <!-- inject:css -->
-    <link rel="stylesheet" href="{{ asset('assets') }}/dashboard/fonts/feather-font/css/iconfont.css">
-    <link rel="stylesheet" href="{{ asset('assets') }}/dashboard/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/dashboard/fonts/feather-font/css/iconfont.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dashboard/vendors/flag-icon-css/css/flag-icon.min.css') }}">
     <!-- endinject -->
 
     <!-- Layout styles -->
-    <link rel="stylesheet" href="{{ asset('assets') }}/dashboard/css/demo_1/style.css">
+    <link rel="stylesheet" href="{{ asset('assets/dashboard/css/demo_1/style.css') }}">
     <!-- End layout styles -->
 
     <!-- include css -->
     <link rel="stylesheet" href="{{ asset('assets/dashboard/css/include/progress.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dashboard/css/include/toastify.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dashboard/vendors/bootstrap-icons/bootstrap-icons.css') }}">
+
+    {{-- JQuery --}}
+    {{-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script> --}}
     {{-- <link rel="stylesheet" href="{{ asset('assets/dashboard/css/include/jquery.dataTables.min.css') }}"> --}}
-    <link rel="stylesheet" href="{{ asset("assets") }}/dashboard/vendors/bootstrap-icons/bootstrap-icons.css">
-
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
-
-
-    {{-- <link rel="shortcut icon" href="{{ asset('assets') }}/dashboard/images/favicon.png" /> --}}
 
 
 </head>
@@ -84,10 +83,31 @@
                                     <a href="{{ route('about-us.index') }}" class="nav-link">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">Stats</a>
+                                    <a href="{{ route('stats.index') }}" class="nav-link">Stats</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">Team</a>
+                                    <a href="{{ route("team.index") }}" class="nav-link">Team</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#service" role="button" aria-expanded="false"
+                            aria-controls="emails">
+                            <i class="link-icon" data-feather="mail"></i>
+                            <span class="link-title">Service</span>
+                            <i class="link-arrow" data-feather="chevron-down"></i>
+                        </a>
+                        <div class="collapse" id="service">
+                            <ul class="nav sub-menu">
+                                <li class="nav-item">
+                                    <a href="{{ route("service.index") }}" class="nav-link">Our Service</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">Fetured Service</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">Features</a>
                                 </li>
                             </ul>
                         </div>
@@ -716,39 +736,38 @@
     </div>
 
     <!-- script -->
-    {{-- JQuery --}}
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
-
-    <!-- include js -->
     <script src="{{ asset('assets/dashboard/js/include/config.js') }}"></script>
     <script src="{{ asset('assets/dashboard/js/include/axios.min.js') }}"></script>
     <script src="{{ asset('assets/dashboard/js/include/toastify-js.js') }}"></script>
+
+
     @yield('script')
 
     <!-- core:js -->
-    <script src="{{ asset('assets') }}/dashboard/vendors/core/core.js"></script>
+    <script src="{{ asset('assets/dashboard/vendors/core/core.js') }}"></script>
     <!-- endinject -->
 
     <!-- plugin js for this page -->
     {{-- <script src="{{ asset('assets') }}/dashboard/vendors/chartjs/Chart.min.js"></script> --}}
     {{-- <script src="{{ asset('assets') }}/dashboard/vendors/jquery.flot/jquery.flot.js"></script>
     <script src="{{ asset('assets') }}/dashboard/vendors/jquery.flot/jquery.flot.resize.js"></script> --}}
-    <script src="{{ asset('assets') }}/dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="{{ asset('assets/dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
     {{-- <script src="{{ asset('assets') }}/dashboard/vendors/apexcharts/apexcharts.min.js"></script> --}}
     {{-- <script src="{{ asset('assets') }}/dashboard/vendors/progressbar.js/progressbar.min.js"></script> --}}
     {{-- <script src="{{ asset('assets') }}/dashboard/vendors/datatables.net/jquery.dataTables.js"></script>
     <script src="{{ asset('assets') }}/dashboard/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script> --}}
+    <script src="{{ asset('assets/dashboard/vendors/datatables.net/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('assets/dashboard/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
     <!-- end plugin js for this page -->
 
     <!-- inject:js -->
-    <script src="{{ asset('assets') }}/dashboard/vendors/feather-icons/feather.min.js"></script>
-    <script src="{{ asset('assets') }}/dashboard/js/template.js"></script>
+    <script src="{{ asset('assets/dashboard/vendors/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/dashboard/js/template.js') }}"></script>
     <!-- endinject -->
 
     <!-- custom js for this page -->
-    <script src="{{ asset('assets') }}/dashboard/js/dashboard.js"></script>
-    <script src="{{ asset('assets') }}/dashboard/js/datepicker.js"></script>
+    <script src="{{ asset('assets/dashboard/js/dashboard.js') }}"></script>
+    <script src="{{ asset('assets/dashboard/js/datepicker.js') }}"></script>
     {{-- <script src="{{ asset('assets') }}/dashboard/js/data-table.js"></script> --}}
     <!-- end custom js for this page -->
 </body>

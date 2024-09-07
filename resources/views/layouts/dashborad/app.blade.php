@@ -1,3 +1,5 @@
+{{-- This layout for login & register page --}}
+
 <!DOCTYPE html>
 <html lang="en">
 

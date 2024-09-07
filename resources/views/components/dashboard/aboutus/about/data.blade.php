@@ -88,8 +88,8 @@
         const respons = await axios.get("{{ route('about-us.item-data') }}");
         hideLoader();
 
-        let tableList = $("#tableList");
-        let tableData = $("#tableData");
+        // let tableList = $("#tableList");
+        // let tableData = $("#tableData");
 
         tableData.DataTable().destroy();
         tableList.empty();

@@ -5,6 +5,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\Website\Aboutus\AboutItemController;
 use App\Http\Controllers\Dashboard\Website\Aboutus\AboutUsController;
+use App\Http\Controllers\Dashboard\Website\Aboutus\StatController;
+use App\Http\Controllers\Dashboard\Website\Aboutus\TeamController;
+use App\Http\Controllers\Dashboard\Website\Service\ServiceController;
 use App\Http\Controllers\Homepage\HomepageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -36,7 +39,7 @@ Route::get("/reset-password", [UserController::class, "showResetPasswordPage"])-
 
 // Login and Registration
 // Route::post("/user-registration", [UserController::class, "userRegistration"])->name("register");
-Route::post("/user-login", [UserController::class, "logIn"])->name("login");
+Route::post("/user-sign-in", [UserController::class, "logIn"])->name("login");
 
 // Logout
 Route::get("/logout", [UserController::class, "userLogout"])->name("user.logout");
@@ -53,14 +56,14 @@ Route::middleware("authCheck")->group(function () {
 
     // Profile
     Route::get("/edit-profile", [ProfileController::class, "showProfilePage"])->name("user.profile");
-    route::get("/user/details", [ProfileController::class, "userDetails"])->name("user.details");
+    route::get("/profile-details", [ProfileController::class, "userDetails"])->name("user.details");
 
     Route::post("/profile/info-update", [ProfileController::class, "updateProfileInfo"])->name("profile.update.info");
     // Route::post("/profile/picture-update", [ProfileController::class, "updateProfilePicture"])->name("profile.update.picture");
     // Route::post("/profile/password-update", [ProfileController::class, "UpdatePassword"])->name("profile.update.password");
 
 
-    Route::prefix("dashboard/website")->group(function () {
+    Route::prefix("/dashboard/website")->group(function () {
         // About Us
         Route::get("/about-us", [AboutUsController::class, "showAboutUsPage"])->name("about-us.index");
         Route::get("/about-us/data", [AboutUsController::class, "aboutUsData"])->name("about-us.data");
@@ -70,13 +73,29 @@ Route::middleware("authCheck")->group(function () {
         Route::post("/about-us/item-create", [AboutItemController::class, "createItem"])->name("about-us.item-create");
         Route::post("/about-us/item-update", [AboutItemController::class, "updateItem"])->name("about-us.item-update");
         Route::post("/about-us/item-delete", [AboutItemController::class, "deleteItem"])->name("about-us.item-delete");
-    });
 
-    // Category
-    Route::get("/category", [CategoryController::class, "showCategoryPage"])->name("category.index");
-    Route::post("/category/create", [CategoryController::class, "store"])->name("category.create");
-    Route::get("/category/list", [CategoryController::class, "categoryList"])->name("category.list");
-    Route::post("/category/details", [CategoryController::class, "categoryById"])->name("category.details");
-    Route::post("/category/update", [CategoryController::class, "updateCategory"])->name("category.update");
-    Route::post("/category/delete", [CategoryController::class, "deleteCategory"])->name("category.delete");
+        // Stats
+        Route::get("/stats", [StatController::class, "showStatPage"])->name("stats.index");
+        Route::get("/stat-id", [StatController::class, "statById"])->name("stat.id");
+        Route::get("/stat-data", [StatController::class, "statData"])->name("stats.data");
+        Route::post("/stat-create", [StatController::class, "createStat"])->name("stat.create");
+        Route::post("/stat-update", [StatController::class, "updateStat"])->name("stat.update");
+        Route::post("/stat-delete", [StatController::class, "deleteStat"])->name("stat.delete");
+
+        // Team
+        Route::get("/team", [TeamController::class, "showTeamPage"])->name("team.index");
+        Route::get("/team-id", [TeamController::class, "teamById"])->name("team.id");
+        Route::get("/team-data", [TeamController::class, "teamData"])->name("team.data");
+        Route::post("/team-create", [TeamController::class, "createTeam"])->name("team.create");
+        Route::post("/team-update", [TeamController::class, "updateTeam"])->name("team.update");
+        Route::post("/team-delete", [TeamController::class, "deleteTeam"])->name("team.delete");
+
+        // Service
+        Route::get("/service", [ServiceController::class, "showServicePage"])->name("service.index");
+        Route::get("/service-id", [ServiceController::class, "serviceById"])->name("service.id");
+        Route::get("/service-data", [ServiceController::class, "serviceData"])->name("service.data");
+        Route::post("/service-create", [ServiceController::class, "createService"])->name("service.create");
+        Route::post("/service-update", [ServiceController::class, "updateService"])->name("service.update");
+        Route::post("/service-delete", [ServiceController::class, "deleteService"])->name("service.delete");
+    });
 });
