@@ -1,17 +1,17 @@
 <?php
 
-use App\Helper\JWTToken;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\Website\Aboutus\AboutItemController;
 use App\Http\Controllers\Dashboard\Website\Aboutus\AboutUsController;
 use App\Http\Controllers\Dashboard\Website\Aboutus\StatController;
 use App\Http\Controllers\Dashboard\Website\Aboutus\TeamController;
+use App\Http\Controllers\Dashboard\Website\FaqController;
+use App\Http\Controllers\Dashboard\Website\LayoutController;
 use App\Http\Controllers\Dashboard\Website\Service\ServiceController;
+use App\Http\Controllers\Dashboard\Website\TestimonialController;
 use App\Http\Controllers\Homepage\HomepageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get("/", [HomepageController::class, "showHomePage"])->name("home.index");
@@ -19,12 +19,6 @@ Route::get("/about", [HomepageController::class, "showAboutPage"])->name("home.a
 Route::get("/services", [HomepageController::class, "showServicesPage"])->name("home.service");
 Route::get("/pricing", [HomepageController::class, "showPricingPage"])->name("home.pricing");
 Route::get("/contact", [HomepageController::class, "showContactPage"])->name("home.contact");
-
-
-
-
-
-
 
 Route::get("/sign-in", [UserController::class, "showLoginPage"])->name("user.login");
 Route::get("/send-otp", [UserController::class, "showSendOTPPage"])->name("user.send-otp");
@@ -64,12 +58,14 @@ Route::middleware("authCheck")->group(function () {
 
 
     Route::prefix("/dashboard/website")->group(function () {
-        // About Us
+        // About
         Route::get("/about-us", [AboutUsController::class, "showAboutUsPage"])->name("about-us.index");
         Route::get("/about-us/data", [AboutUsController::class, "aboutUsData"])->name("about-us.data");
         Route::post("/about-us/update", [AboutUsController::class, "updateAboutUs"])->name("about-us.update");
 
+        // About Item
         Route::get("/about-us/item-data", [AboutItemController::class, "getItem"])->name("about-us.item-data");
+        Route::get("/about-us/item-id", [AboutItemController::class, "itemById"])->name("about-us.item-id");
         Route::post("/about-us/item-create", [AboutItemController::class, "createItem"])->name("about-us.item-create");
         Route::post("/about-us/item-update", [AboutItemController::class, "updateItem"])->name("about-us.item-update");
         Route::post("/about-us/item-delete", [AboutItemController::class, "deleteItem"])->name("about-us.item-delete");
@@ -97,5 +93,31 @@ Route::middleware("authCheck")->group(function () {
         Route::post("/service-create", [ServiceController::class, "createService"])->name("service.create");
         Route::post("/service-update", [ServiceController::class, "updateService"])->name("service.update");
         Route::post("/service-delete", [ServiceController::class, "deleteService"])->name("service.delete");
+
+        // Testimonial
+        Route::get("/testimonial", [TestimonialController::class, "showTestimonialPage"])->name("testimonial.index");
+        Route::get("/testimonial-id", [TestimonialController::class, "testimonialById"])->name("testimonial.id");
+        Route::get("/testimonial-data", [TestimonialController::class, "testimonialData"])->name("testimonial.data");
+        Route::post("/testimonial-create", [TestimonialController::class, "createTestimonial"])->name("testimonial.create");
+        Route::post("/testimonial-update", [TestimonialController::class, "updateTestimonial"])->name("testimonial.update");
+        Route::post("/testimonial-delete", [TestimonialController::class, "deleteTestimonial"])->name("testimonial.delete");
+
+        // FAQ
+        Route::get("/faq", [FaqController::class, "showFaqPage"])->name("faq.index");
+        Route::get("/faq-id", [FaqController::class, "faqById"])->name("faq.id");
+        Route::get("/faq-data", [FaqController::class, "faqData"])->name("faq.data");
+        Route::post("/faq-create", [FaqController::class, "createFaq"])->name("faq.create");
+        Route::post("/faq-update", [FaqController::class, "updateFaq"])->name("faq.update");
+        Route::post("/faq-delete", [FaqController::class, "deleteFaq"])->name("faq.delete");
+
+        // Layout
+        Route::get("/layout", [LayoutController::class, "showLayoutPage"])->name("layout.index");
+        Route::get("/layout-data", [LayoutController::class, "layoutData"])->name("layout.data");
+        Route::post("/layout-social", [LayoutController::class, "socialUpdate"])->name("layout.social");
+        Route::post("/layout-favicon", [LayoutController::class, "faviconUpdate"])->name("layout.favicon");
+        Route::post("/layout-footer", [LayoutController::class, "footerUpdate"])->name("layout.footer");
+        Route::post("/layout-header", [LayoutController::class, "headerLogoUpdate"])->name("layout.header");
+
+
     });
 });

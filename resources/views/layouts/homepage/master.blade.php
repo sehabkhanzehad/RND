@@ -1,3 +1,6 @@
+@php
+    $layout = \App\Models\Layout::first();
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +12,7 @@
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <link href="{{ asset('assets') }}/homepage/img/favicon.png" rel="icon">
+    <link href="{{ $layout->favicon }}" rel="icon">
     <link href="{{ asset('assets') }}/homepage/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Fonts -->
@@ -36,10 +39,10 @@
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-            <a href="index.html" class="logo d-flex align-items-center me-auto">
+            <a href="{{ route("home.index") }}" class="logo d-flex align-items-center me-auto">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                <!-- <img src="{{ asset('assets') }}/homepage/img/logo.png" alt=""> -->
-                <h1 class="sitename">Logis</h1>
+                <img src="{{ $layout->header_logo }}" alt="">
+                {{-- <h1 class="sitename">Logis</h1> --}}
             </a>
 
             <nav id="navmenu" class="navmenu">
@@ -87,27 +90,32 @@
         <div class="container footer-top">
             <div class="row gy-4">
                 <div class="col-lg-5 col-md-12 footer-about">
-                    <a href="index.html" class="logo d-flex align-items-center">
-                        <span class="sitename">Logis</span>
+                    <a href="{{ route('home.index') }}" class="logo d-flex align-items-center me-auto">
+                        {{-- <span class="sitename">Logis</span> --}}
+                        <img src="{{ $layout->footer_logo }}" alt="">
                     </a>
-                    <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita
-                        valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+
+
+                    <p style="text-align: justify">{{ $layout->footer_text }}</p>
                     <div class="social-links d-flex mt-4">
-                        <a href=""><i class="bi bi-twitter-x"></i></a>
-                        <a href=""><i class="bi bi-facebook"></i></a>
-                        <a href=""><i class="bi bi-instagram"></i></a>
-                        <a href=""><i class="bi bi-linkedin"></i></a>
+                        <a href="{{ $layout->facebook_link }}"><i class="bi bi-facebook"></i></a>
+                        <a href="{{ $layout->linkedin_link }}"><i class="bi bi-linkedin"></i></a>
+                        <a href="{{ $layout->whatsapp_link }}"><i class="bi bi-whatsapp"></i></a>
+                        <a href="{{ $layout->instagram_link }}"><i class="bi bi-instagram"></i></a>
+                        <a href="{{ $layout->twitter_link }}"><i class="bi bi-twitter-x"></i></a>
                     </div>
                 </div>
 
                 <div class="col-lg-2 col-6 footer-links">
                     <h4>Useful Links</h4>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Terms of service</a></li>
-                        <li><a href="#">Privacy policy</a></li>
+                        <li><a href="{{ route('home.index') }}">Home</a></li>
+                        <li><a href="{{ route('home.about') }}">About us</a></li>
+                        <li><a href="{{ route('home.service') }}">Services</a></li>
+                        <li><a href="{{ route('home.pricing') }}">Pricing</a></li>
+                        <li><a href="{{ route('home.contact') }}">Contact</a></li>
+                        {{-- <li><a href="#">Terms of service</a></li> --}}
+                        {{-- <li><a href="#">Privacy policy</a></li> --}}
                     </ul>
                 </div>
 
@@ -135,14 +143,14 @@
         </div>
 
         <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">Logis</strong> <span>All Rights Reserved</span>
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">RND GLOBAL NEST</strong> <span>All Rights Reserved</span>
             </p>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->
                 <!-- You can delete the links only if you've purchased the pro version. -->
                 <!-- Licensing information: https://bootstrapmade.com/license/ -->
                 <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                Developed by <a href="{{ route('home.index') }}">RND GLOBAL NEST</a>
             </div>
         </div>
 

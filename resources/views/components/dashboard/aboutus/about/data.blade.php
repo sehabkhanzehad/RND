@@ -1,14 +1,12 @@
 <div class="row">
- <div class="col-md-4">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title">Update About Us</h6>
-                {{-- <form class="forms-sample"> --}}
                 <div class="form-group">
                     <label>Video Link</label>
                     <input id="video_link" value="" type="text" name="video_link" class="form-control">
                 </div>
-
                 <div class="form-group">
                     <label>Image</label>
                     <input id="image" type="file" name="image"
@@ -23,9 +21,7 @@
                     <textarea id ="description" class="form-control" style="font-size: px; text-align: justify;" name="description"
                         rows="6"></textarea>
                 </div>
-
                 <button onclick="upadteAbout()" type="submit" class="btn btn-primary mr-2">Update</button>
-                {{-- </form> --}}
             </div>
         </div>
     </div>
@@ -35,8 +31,7 @@
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title d-inline-block">Item</h6>
-                <button type="button" class="btn btn-primary btn-icon d-inline-block float-right" data-toggle="modal"
-                    data-target="#addItem">
+                <button type="button" class="btn btn-primary btn-icon d-inline-block float-right">
                     <i data-feather="plus-circle"></i>
                 </button>
                 <div class="table-responsive">
@@ -61,27 +56,7 @@
 </div>
 
 <script>
-    getAboutUs();
-
-    getItemList();
-
-
-
-
-    async function getAboutUs() {
-        showLoader();
-        const response = await axios.get("{{ route('about-us.data') }}");
-        hideLoader();
-
-        if (response.data.status == "success") {
-            document.getElementById('video_link').value = response.data.data.video_link;
-            document.getElementById('description').value = response.data.data.description;
-            document.getElementById('blah1').src = response.data.data.image;
-        } else {
-            errorToast(response.data.message);
-        }
-    }
-
+    // getItemList();
 
     async function getItemList() {
         showLoader();
@@ -130,45 +105,5 @@
             "bLengthChange": false,
             "paging": false
         });
-    }
-
-    async function upadteAbout() {
-        let videoLink = document.getElementById('video_link').value;
-        let image = document.getElementById('image').files[0];
-        let description = document.getElementById('description').value;
-
-
-        if (videoLink == "" && !image && description == "") {
-            errorToast("Please enter any one field.");
-        } else if (videoLink == "") {
-            errorToast("Please enter video link.");
-        } else if (!image) {
-            errorToast("Please select an image.");
-        } else if (description == "") {
-            errorToast("Please enter a description.");
-        } else {
-
-            let formData = new FormData();
-            formData.append('video_link', videoLink);
-            formData.append('image', image);
-            formData.append('description', description);
-
-            let config = {
-                headers: {
-                    'content-type': 'multipart/form-data',
-                },
-            }
-
-            showLoader();
-            const response = await axios.post("{{ route('about-us.update') }}", formData, config);
-            hideLoader();
-
-            if (response.data.status == "success") {
-                await getAboutUs();
-                successToast(response.data.message);
-            } else {
-                errorToast(response.data.message);
-            }
-        }
     }
 </script>

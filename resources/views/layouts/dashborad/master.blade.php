@@ -71,6 +71,12 @@
                     </li>
                     <li class="nav-item nav-category">Website Management</li>
                     <li class="nav-item">
+                        <a href="{{ route('layout.index') }}" class="nav-link">
+                            <i class="link-icon" data-feather="layout"></i>
+                            <span class="link-title">Layout</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#about" role="button" aria-expanded="false"
                             aria-controls="about">
                             <i class="link-icon" data-feather="users"></i>
@@ -79,14 +85,14 @@
                         </a>
                         <div class="collapse" id="about">
                             <ul class="nav sub-menu">
-                                {{-- <li class="nav-item">
+                                <li class="nav-item">
                                     <a href="{{ route('about-us.index') }}" class="nav-link">About</a>
-                                </li> --}}
+                                </li>
                                 <li class="nav-item">
                                     <a href="{{ route('stats.index') }}" class="nav-link">Stats</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route("team.index") }}" class="nav-link">Team</a>
+                                    <a href="{{ route('team.index') }}" class="nav-link">Team</a>
                                 </li>
                             </ul>
                         </div>
@@ -94,23 +100,36 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#service" role="button" aria-expanded="false"
                             aria-controls="emails">
-                            <i class="link-icon" data-feather="mail"></i>
+                            <i class="link-icon" data-feather="check-circle"></i>
                             <span class="link-title">Service</span>
                             <i class="link-arrow" data-feather="chevron-down"></i>
                         </a>
                         <div class="collapse" id="service">
                             <ul class="nav sub-menu">
                                 <li class="nav-item">
-                                    <a href="{{ route("service.index") }}" class="nav-link">Our Service</a>
-                                </li>
-                                {{-- <li class="nav-item">
-                                    <a href="" class="nav-link">Fetured Service</a>
+                                    <a href="{{ route('service.index') }}" class="nav-link">Our Service</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="" class="nav-link">Fetured Service</a>
+                                </li>
+                                {{-- <li class="nav-item">
                                     <a href="" class="nav-link">Features</a>
                                 </li> --}}
                             </ul>
                         </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('testimonial.index') }}" class="nav-link">
+                            <i class="link-icon" data-feather="mail"></i>
+                            <span class="link-title">Testimonial</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('faq.index') }}" class="nav-link">
+                            <i class="link-icon" data-feather="message-square"></i>
+                            <span class="link-title">Faq</span>
+                        </a>
                     </li>
                     {{-- <li class="nav-item nav-category">web apps</li>
                     <li class="nav-item">
@@ -135,12 +154,7 @@
                         </div>
                     </li> --}}
 
-                    {{-- <li class="nav-item">
-                        <a href="pages/apps/chat.html" class="nav-link">
-                            <i class="link-icon" data-feather="message-square"></i>
-                            <span class="link-title">Chat</span>
-                        </a>
-                    </li>
+                    {{--
                     <li class="nav-item">
                         <a href="pages/apps/calendar.html" class="nav-link">
                             <i class="link-icon" data-feather="calendar"></i>

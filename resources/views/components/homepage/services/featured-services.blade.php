@@ -1,4 +1,4 @@
-  <!-- Featured Services Section -->
+  {{-- <!-- Featured Services Section -->
   <section id="featured-services" class="featured-services section">
 
       <div class="container">
@@ -43,4 +43,4 @@
 
       </div>
 
-  </section><!-- /Featured Services Section -->
+  </section><!-- /Featured Services Section --> --}}

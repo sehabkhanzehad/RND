@@ -1,18 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard\Website\Aboutus;
+namespace App\Http\Controllers\Dashboard\Website;
 
 use App\Http\Controllers\Controller;
-use App\Models\AboutItem;
+use App\Models\Faq;
 use Illuminate\Http\Request;
 
-class AboutItemController extends Controller
+class FaqController extends Controller
 {
+    public function showFaqPage()
+    {
+        return view("pages.dashboard.website.faq-page");
+    }
 
-    public function getItem()
+    public function faqData()
     {
         try {
-            $data = AboutItem::all();
+            $data = Faq::all();
             return response()->json([
                 'status' => 'success',
                 'data' => $data
@@ -25,14 +29,14 @@ class AboutItemController extends Controller
         }
     }
 
-    public function itemById(Request $request)
+    public function faqById(Request $request)
     {
         try {
             $id = $request->input("id");
-            $data = AboutItem::where("id", $id)->first();
+            $data = Faq::where("id", $id)->first();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Item found successfully',
+                'message' => 'Faq found successfully',
                 'data' => $data
             ]);
         } catch (\Throwable $th) {
@@ -43,22 +47,20 @@ class AboutItemController extends Controller
         }
     }
 
-    public function createItem(Request $request)
+    public function createFaq(Request $request)
     {
         try {
-            $iconName = $request->input("icon_name");
-            $title = $request->input("title");
-            $description = $request->input("description");
+            $question = $request->input("question");
+            $answer = $request->input("answer");
 
-            AboutItem::create([
-                "icon_name" => $iconName,
-                "title" => $title,
-                "description" => $description,
+            Faq::create([
+                "question" => $question,
+                "answer" => $answer,
             ]);
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Item Created Successfully.',
+                'message' => 'Faq Created Successfully.',
             ]);
         } catch (\Throwable $th) {
             return response()->json([
@@ -68,23 +70,21 @@ class AboutItemController extends Controller
         }
     }
 
-    public function updateItem(Request $request)
+    public function updateFaq(Request $request)
     {
         try {
             $id = $request->input("id");
-            $iconName = $request->input("icon_name");
-            $title = $request->input("title");
-            $description = $request->input("description");
+            $question = $request->input("question");
+            $answer = $request->input("answer");
 
-            AboutItem::where("id", $id)->update([
-                "icon_name" => $iconName,
-                "title" => $title,
-                "description" => $description,
+            Faq::where("id", $id)->update([
+                "question" => $question,
+                "answer" => $answer,
             ]);
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Item Updated Successfully.',
+                'message' => 'Faq Updated Successfully.',
             ]);
         } catch (\Throwable $th) {
             return response()->json([
@@ -94,14 +94,14 @@ class AboutItemController extends Controller
         }
     }
 
-    public function deleteItem(Request $request)
+    public function deleteFaq(Request $request)
     {
         try {
             $id = $request->input("id");
-            AboutItem::where("id", $id)->delete();
+            Faq::where("id", $id)->delete();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Item Deleted Successfully.',
+                'message' => 'Faq Deleted Successfully.',
             ]);
         } catch (\Throwable $th) {
             return response()->json([

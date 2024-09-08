@@ -1,9 +1,9 @@
 @extends('layouts.dashborad.master')
 
 @section('content')
-    @include('components.dashboard.aboutus.stats.data')
-    @include('components.dashboard.aboutus.stats.stat-create')
-    @include('components.dashboard.aboutus.stats.stat-delete')
+    @include('components.dashboard.faq.data')
+    @include('components.dashboard.faq.create')
+    @include('components.dashboard.faq.delete')
 @endsection
 
 
@@ -13,7 +13,7 @@
 
         async function getData() {
             showLoader();
-            const respons = await axios.get("{{ route('stats.data') }}");
+            const respons = await axios.get("{{ route('faq.data') }}");
             hideLoader();
 
             let tableList = $("#tableList");
@@ -25,8 +25,8 @@
             respons.data.data.forEach(function(item, index) {
                 let row = `<tr>
                     <td>${index + 1}</td>
-                    <td>${item.stat_name}</td>
-                    <td>${item.stat_value}</td>
+                    <td class="text-wrap">${item.question}</td>
+                    <td class="text-wrap text-justify">${item.answer}</td>
                     <td>
                         <button type="button"class="editBtn btn btn-success" data-no="${item.id}">Edit</button>
                         <button type="button"class="deleteBtn btn btn-danger" data-no="${item.id}">Delete</button>
@@ -37,6 +37,7 @@
 
             $(".editBtn").on("click", async function() {
                 let id = $(this).data("no");
+                document.getElementById("save-form").reset();
                 await fillupEditForm(id);
                 $("#addModal").modal("show");
             });
@@ -44,7 +45,6 @@
             $(".deleteBtn").on("click", function() {
                 let id = $(this).data("no");
                 $("#deleteModal").modal("show");
-                // document.getElementById("deleteId").value = id;
                 $("#deleteId").val(id);
             });
 
@@ -58,42 +58,48 @@
 
         async function fillupEditForm(id) {
             showLoader();
-            const respons = await axios.get("{{ route('stat.id') }}", {
+            const respons = await axios.get("{{ route('faq.id') }}", {
                 params: {
-                    stat_id: id
+                    id: id
                 }
             });
             hideLoader();
-            document.getElementById('stat_id').value = respons.data.data.id;
-            document.getElementById('modalTitle').innerHTML = "Edit Item";
-            document.getElementById('stat_name').value = respons.data.data.stat_name;
-            document.getElementById('stat_value').value = respons.data.data.stat_value;
+            document.getElementById('dataId').value = respons.data.data.id;
+            document.getElementById('modalTitle').innerHTML = "Edit FAQ";
+            document.getElementById('question').value = respons.data.data.question;
+            document.getElementById('answer').value = respons.data.data.answer;
             document.getElementById('addBtn').innerHTML = "Update";
-            document.getElementById('addBtn').setAttribute("onclick", "updateStat()");
+            document.getElementById('addBtn').setAttribute("onclick", "updateData()");
+        }
+        function openModal() {
+            document.getElementById("save-form").reset();
+            document.getElementById('modalTitle').innerHTML = "Add FAQ";
+            document.getElementById('addBtn').innerHTML = "Add";
+            document.getElementById('addBtn').setAttribute("onclick", "addData()");
+            $("#addModal").modal("show");
         }
 
-        async function addStat() {
-            let stat_name = document.getElementById('stat_name').value;
-            let stat_value = document.getElementById('stat_value').value;
+        async function addData() {
+            let question = document.getElementById('question').value;
+            let answer = document.getElementById('answer').value;
 
-            if (stat_name == "" && stat_value == "") {
+            if (question == "" && answer == "") {
                 errorToast("Please enter any one field.");
-            } else if (stat_name == "") {
-                errorToast("Please enter stat name.");
-            } else if (stat_value == "") {
-                errorToast("Please enter stat value.");
+            } else if (question == "") {
+                errorToast("Please enter question.");
+            } else if (answer == "") {
+                errorToast("Please enter answer.");
             } else {
                 showLoader();
                 try {
-                    const response = await axios.post("{{ route('stat.create') }}", {
-                        stat_name: stat_name,
-                        stat_value: stat_value,
+                    const response = await axios.post("{{ route('faq.create') }}", {
+                        question: question,
+                        answer: answer,
                     });
                     hideLoader();
 
                     if (response.data.status == "success") {
                         $("#addModal").modal("hide");
-                        // document.getElementById("modal-close").click();
                         document.getElementById('save-form').reset();
                         await getData();
                         successToast(response.data.message);
@@ -102,30 +108,30 @@
                     }
                 } catch (err) {
                     hideLoader();
-                    warningToast("Stat is already exist.");
+                    warningToast("Something went wrong.");
                 }
 
             }
         }
 
-        async function updateStat() {
-            let stat_id = document.getElementById('stat_id').value;
-            let stat_name = document.getElementById('stat_name').value;
-            let stat_value = document.getElementById('stat_value').value;
+        async function updateData() {
+            let id = document.getElementById('dataId').value;
+            let question = document.getElementById('question').value;
+            let answer = document.getElementById('answer').value;
 
-            if (stat_name == "" && stat_value == "") {
+            if (question == "" && answer == "") {
                 errorToast("Please enter any one field.");
-            } else if (stat_name == "") {
-                errorToast("Please enter stat name.");
-            } else if (stat_value == "") {
-                errorToast("Please enter stat value.");
+            } else if (question == "") {
+                errorToast("Please enter question.");
+            } else if (answer == "") {
+                errorToast("Please enter answer.");
             } else {
                 showLoader();
                 try {
-                    const response = await axios.post("{{ route('stat.update') }}", {
-                        stat_id: stat_id,
-                        stat_name: stat_name,
-                        stat_value: stat_value,
+                    const response = await axios.post("{{ route('faq.update') }}", {
+                        id: id,
+                        question: question,
+                        answer: answer,
                     });
                     hideLoader();
                     if (response.data.status == "success") {
@@ -138,7 +144,7 @@
                     }
                 } catch (err) {
                     hideLoader();
-                    warningToast("Stat is already exist.");
+                    warningToast("Something went wrong.");
                 }
 
             }
@@ -148,7 +154,7 @@
         async function deleteItem() {
             let id = $("#deleteId").val();
             showLoader();
-            const response = await axios.post("{{ route('stat.delete') }}", {
+            const response = await axios.post("{{ route('faq.delete') }}", {
                 id: id
             });
             hideLoader();
