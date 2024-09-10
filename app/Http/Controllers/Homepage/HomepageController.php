@@ -64,6 +64,7 @@ class HomepageController extends Controller
             "testimonials" => Testimonial::all(),
             "faqs" => Faq::all(),
             "contacts" => Contact::first(),
+            "features" => Feature::all(),
         ]);
     }
 
