@@ -1,8 +1,8 @@
-@extends("layouts.dashborad.master")
-@section("content")
-@include('components.dashboard.service.feature.data')
-@include("components.dashboard.service.feature.create")
-@include("components.dashboard.service.feature.delete")
+@extends('layouts.dashborad.master')
+@section('content')
+    @include('components.dashboard.service.feature.data')
+    @include('components.dashboard.service.feature.create')
+    @include('components.dashboard.service.feature.delete')
 @endsection
 
 @section('script')
@@ -56,7 +56,7 @@
                 "bLengthChange": false,
                 "paging": false
             });
-
+            7
         }
 
         async function fillupEditForm(id) {
@@ -83,8 +83,10 @@
         }
 
         function openModal() {
-            document.getElementById("blah1").src = "{{ asset("assets/dashboard/images/default_profile.png") }}";
-            document.getElementById("blah2").src = "{{ asset("assets/dashboard/images/default_profile.png") }}";
+            document.getElementById("blah1").src = "{{ asset('assets/dashboard/images/images.png') }}";
+            document.getElementById("blah2").src = "{{ asset('assets/dashboard/images/images.png') }}";
+            document.getElementById("image1").value = "";
+            document.getElementById("image2").value = "";
             document.getElementById("save-form").reset();
             document.getElementById('modalTitle').innerHTML = "Add Feature";
             document.getElementById('addBtn').innerHTML = "Add";
@@ -93,36 +95,35 @@
         }
 
         async function addData() {
-            let name = document.getElementById('name').value;
-            let designation = document.getElementById('designation').value;
-            let description = document.getElementById('description').value;
-            let image = document.getElementById('image').files[0];
-            let linkedin = document.getElementById('linkedin').value;
-            let github = document.getElementById('github').value;
-            let facebook = document.getElementById('facebook').value;
-            let whatsapp = document.getElementById('whatsapp').value;
+            let title1 = document.getElementById('title1').value;
+            let title2 = document.getElementById('title2').value;
+            let description1 = document.getElementById('description1').value;
+            let description2 = document.getElementById('description2').value;
+            let image1 = document.getElementById('image1').files[0];
+            let image2 = document.getElementById('image2').files[0];
 
-            if (name == "" && designation == "" && description == "" && !image) {
-                errorToast("Please enter any one field.");
-            } else if (name == "") {
-                errorToast("Please enter name.");
-            } else if (designation == "") {
-                errorToast("Please enter designation.");
-            } else if (description == "") {
-                errorToast("Please enter description.");
-            } else if (!image) {
-                errorToast("Please select an image.");
+            if (title1 == "" && title2 == "" && description1 == "" && description2 == "" && !image1 && !image2) {
+                errorToast("Please fill all the fields.");
+            } else if (title1 == "") {
+                errorToast("Please enter title 1.");
+            } else if (title2 == "") {
+                errorToast("Please enter title 2.");
+            } else if (description1 == "") {
+                errorToast("Please enter description 1.");
+            } else if (description2 == "") {
+                errorToast("Please enter description 2.");
+            } else if (image1 == "") {
+                errorToast("Please select image 1.");
+            } else if (image2 == "") {
+                errorToast("Please select image 2.");
             } else {
-
                 let formData = new FormData();
-                formData.append('name', name);
-                formData.append('designation', designation);
-                formData.append('image', image);
-                formData.append('description', description);
-                formData.append('linkedin_link', linkedin);
-                formData.append('github_link', github);
-                formData.append('facebook_link', facebook);
-                formData.append('whatsapp_link', whatsapp);
+                formData.append('title1', title1);
+                formData.append('title2', title2);
+                formData.append('description1', description1);
+                formData.append('description2', description2);
+                formData.append('image1', image1);
+                formData.append('image2', image2);
 
                 let config = {
                     headers: {
@@ -133,18 +134,17 @@
                 showLoader();
 
                 try {
-                    const response = await axios.post("{{ route('team.create') }}", formData, config);
+                    const response = await axios.post("{{ route('feature.create') }}", formData, config);
                     hideLoader();
 
                     if (response.data.status == "success") {
                         $("#addModal").modal("hide");
-                        await getData();
                         document.getElementById('save-form').reset();
+                        await getData();
                         successToast(response.data.message);
                     } else {
                         errorToast(response.data.message);
                     }
-
                 } catch (err) {
                     hideLoader();
                     errorToast("Something wen't wrong. Please try again later.");
@@ -154,33 +154,30 @@
 
         async function updateFeature() {
             let id = document.getElementById('dataId').value;
-            let name = document.getElementById('name').value;
-            let designation = document.getElementById('designation').value;
-            let description = document.getElementById('description').value;
-            let image = document.getElementById('image').files[0];
-            let linkedin = document.getElementById('linkedin').value;
-            let github = document.getElementById('github').value;
-            let facebook = document.getElementById('facebook').value;
-            let whatsapp = document.getElementById('whatsapp').value;
+            let title1 = document.getElementById('title1').value;
+            let title2 = document.getElementById('title2').value;
+            let description1 = document.getElementById('description1').value;
+            let description2 = document.getElementById('description2').value;
+            let image1 = document.getElementById('image1').files[0];
+            let image2 = document.getElementById('image2').files[0];
 
-           if (name == "") {
-                errorToast("Please enter name.");
-            } else if (designation == "") {
-                errorToast("Please enter designation.");
-            } else if (description == "") {
-                errorToast("Please enter description.");
+            if (title1 == "") {
+                errorToast("Please enter title 1.");
+            } else if (title2 == "") {
+                errorToast("Please enter title 2.");
+            } else if (description1 == "") {
+                errorToast("Please enter description 1.");
+            } else if (description2 == "") {
+                errorToast("Please enter description 2.");
             } else {
-
                 let formData = new FormData();
                 formData.append('id', id);
-                formData.append('name', name);
-                formData.append('designation', designation);
-                formData.append('image', image);
-                formData.append('description', description);
-                formData.append('linkedin_link', linkedin);
-                formData.append('github_link', github);
-                formData.append('facebook_link', facebook);
-                formData.append('whatsapp_link', whatsapp);
+                formData.append('title1', title1);
+                formData.append('title2', title2);
+                formData.append('description1', description1);
+                formData.append('description2', description2);
+                formData.append('image1', image1);
+                formData.append('image2', image2);
 
                 let config = {
                     headers: {
@@ -191,7 +188,7 @@
                 showLoader();
 
                 try {
-                    const response = await axios.post("{{ route('team.update') }}", formData, config);
+                    const response = await axios.post("{{ route('feature.update') }}", formData, config);
                     hideLoader();
 
                     if (response.data.status == "success") {
@@ -202,7 +199,6 @@
                     } else {
                         errorToast(response.data.message);
                     }
-
                 } catch (err) {
                     hideLoader();
                     errorToast("Something wen't wrong. Please try again later.");
@@ -213,7 +209,7 @@
         async function deleteItem() {
             let id = $("#deleteId").val();
             showLoader();
-            const response = await axios.post("{{ route('team.delete') }}", {
+            const response = await axios.post("{{ route('feature.delete') }}", {
                 id: id
             });
             hideLoader();

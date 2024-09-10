@@ -160,6 +160,14 @@
             }
         }
 
+        function openModal(){
+            document.getElementById("save-form").reset();
+            document.getElementById('modalTitle').innerHTML = "Add Item";
+            document.getElementById('addBtn').innerHTML = "Add";
+            document.getElementById('addBtn').setAttribute("onclick", "addData()");
+            $("#addModal").modal("show");
+        }
+
         async function fillupEditForm(id) {
             showLoader();
             const respons = await axios.get("{{ route('about-us.item-id') }}", {
