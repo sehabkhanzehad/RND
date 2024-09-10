@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Index - Logis Bootstrap Template</title>
+    @yield('title')
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -39,7 +39,7 @@
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-            <a href="{{ route("home.index") }}" class="logo d-flex align-items-center me-auto">
+            <a href="{{ route('home.index') }}" class="logo d-flex align-items-center me-auto">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <img src="{{ $layout->header_logo }}" alt="">
                 {{-- <h1 class="sitename">Logis</h1> --}}
@@ -47,10 +47,10 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="{{ route("home.index") }}" class="active">Home<br></a></li>
-                    <li><a href="{{ route("home.about") }}">About</a></li>
-                    <li><a href="{{ route("home.service") }}">Services</a></li>
-                    <li><a href="{{ route("home.pricing") }}">Pricing</a></li>
+                    <li><a href="{{ route('home.index') }}" class="active">Home<br></a></li>
+                    <li><a href="{{ route('home.about') }}">About</a></li>
+                    <li><a href="{{ route('home.service') }}">Services</a></li>
+                    <li><a href="{{ route('home.pricing') }}">Pricing</a></li>
                     {{-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
@@ -70,7 +70,7 @@
                             <li><a href="#">Dropdown 4</a></li>
                         </ul>
                     </li> --}}
-                    <li><a href="{{ route("home.contact") }}">Contact</a></li>
+                    <li><a href="{{ route('home.contact') }}">Contact</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
@@ -84,6 +84,7 @@
     <main class="main">
         @yield('content')
     </main>
+
 
     <footer id="footer" class="footer dark-background">
 
@@ -132,18 +133,19 @@
 
                 <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
                     <h4>Contact Us</h4>
-                    <p>A108 Adam Street</p>
-                    <p>New York, NY 535022</p>
-                    <p>United States</p>
-                    <p class="mt-4"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-                    <p><strong>Email:</strong> <span>info@example.com</span></p>
+                    <address>
+                        {{ $contacts->address }}
+                    </address>
+                    <p class="mt-4"><strong>Phone:</strong> <span>{{ $contacts->phone }}</span></p>
+                    <p><strong>Email:</strong> <span>{{ $contacts->email }}</span></p>
                 </div>
 
             </div>
         </div>
 
         <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">RND GLOBAL NEST</strong> <span>All Rights Reserved</span>
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">RND GLOBAL NEST</strong> <span>All Rights
+                    Reserved</span>
             </p>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->

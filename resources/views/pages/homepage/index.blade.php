@@ -1,5 +1,7 @@
 @extends('layouts.homepage.master')
-
+@section("title")
+    <title>Home - RND GlOBAL NEST</title>
+@endsection
 @section('content')
     @include('components.homepage.hero')
     @include('components.homepage.services.featured-services')

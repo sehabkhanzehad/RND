@@ -71,9 +71,28 @@
                     </li>
                     <li class="nav-item nav-category">Website Management</li>
                     <li class="nav-item">
-                        <a href="{{ route('layout.index') }}" class="nav-link">
+                        <a class="nav-link" data-toggle="collapse" href="#layout" role="button" aria-expanded="false"
+                            aria-controls="layout">
                             <i class="link-icon" data-feather="layout"></i>
                             <span class="link-title">Layout</span>
+                            <i class="link-arrow" data-feather="chevron-down"></i>
+                        </a>
+                        <div class="collapse" id="layout">
+                            <ul class="nav sub-menu">
+                                <li class="nav-item">
+                                    <a href="{{ route('layout.index') }}" class="nav-link">Layout</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route("contact.index") }}" class="nav-link">Contacts</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('hero.index') }}" class="nav-link">
+                            <i class="link-icon" data-feather="home"></i>
+                            <span class="link-title">Hero</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -110,7 +129,7 @@
                                     <a href="{{ route('service.index') }}" class="nav-link">Our Service</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">Fetured Service</a>
+                                    <a href="{{ route("feature.index") }}" class="nav-link">Fetured Service</a>
                                 </li>
                                 {{-- <li class="nav-item">
                                     <a href="" class="nav-link">Features</a>

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Homepage;
 use App\Http\Controllers\Controller;
 use App\Models\AboutItem;
 use App\Models\AboutUs;
+use App\Models\Contact;
 use App\Models\Faq;
+use App\Models\Hero;
 use App\Models\Layout;
 use App\Models\Service;
 use App\Models\Stat;
@@ -24,13 +26,15 @@ class HomepageController extends Controller
         $stats = Stat::all();
         $services = Service::all();
         return view("pages.homepage.index", [
+            "hero" => Hero::first(),
             "layout" => $layout,
             "aboutUs" => $aboutUs,
             "aboutItems" => $aboutItems,
             "stats" => $stats,
             "services" => $services,
             "testimonials" => Testimonial::all(),
-            "faqs" => Faq::all()
+            "faqs" => Faq::all(),
+            "contacts" => Contact::first()
         ]);
     }
 
@@ -45,7 +49,8 @@ class HomepageController extends Controller
             "aboutItems" => $aboutItems,
             "stats" => $stats,
             "team" => $team,
-            "testimonials" => Testimonial::all()
+            "testimonials" => Testimonial::all(),
+            "contacts" => Contact::first(),
         ]);
     }
 
@@ -55,17 +60,23 @@ class HomepageController extends Controller
         return view("pages.homepage.services-page", [
             "services" => $services,
             "testimonials" => Testimonial::all(),
-            "faqs" => Faq::all()
+            "faqs" => Faq::all(),
+            "contacts" => Contact::first(),
         ]);
     }
 
     public function showPricingPage(): View
     {
-        return view("pages.homepage.pricing-page");
+        return view("pages.homepage.pricing-page", [
+            "contacts" => Contact::first(),
+        ]);
     }
 
     public function showContactPage(): View
     {
-        return view("pages.homepage.contact-page");
+        return view("pages.homepage.contact-page", [
+            "contacts" => Contact::first(),
+        ]);
     }
 }
+    

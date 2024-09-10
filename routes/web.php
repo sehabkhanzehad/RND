@@ -6,7 +6,9 @@ use App\Http\Controllers\Dashboard\Website\Aboutus\AboutUsController;
 use App\Http\Controllers\Dashboard\Website\Aboutus\StatController;
 use App\Http\Controllers\Dashboard\Website\Aboutus\TeamController;
 use App\Http\Controllers\Dashboard\Website\FaqController;
+use App\Http\Controllers\Dashboard\Website\HeroController;
 use App\Http\Controllers\Dashboard\Website\LayoutController;
+use App\Http\Controllers\Dashboard\Website\Service\FeatureController;
 use App\Http\Controllers\Dashboard\Website\Service\ServiceController;
 use App\Http\Controllers\Dashboard\Website\TestimonialController;
 use App\Http\Controllers\Homepage\HomepageController;
@@ -94,6 +96,14 @@ Route::middleware("authCheck")->group(function () {
         Route::post("/service-update", [ServiceController::class, "updateService"])->name("service.update");
         Route::post("/service-delete", [ServiceController::class, "deleteService"])->name("service.delete");
 
+        // Feature
+        Route::get("/features", [FeatureController::class, "showFeaturePage"])->name("feature.index");
+        Route::get("/feature-id", [FeatureController::class, "featureById"])->name("feature.id");
+        Route::get("/feature-data", [FeatureController::class, "featureData"])->name("feature.data");
+        Route::post("/feature-create", [FeatureController::class, "createFeature"])->name("feature.create");
+        Route::post("/feature-update", [FeatureController::class, "updateFeature"])->name("feature.update");
+        Route::post("/feature-delete", [FeatureController::class, "deleteFeature"])->name("feature.delete");
+
         // Testimonial
         Route::get("/testimonial", [TestimonialController::class, "showTestimonialPage"])->name("testimonial.index");
         Route::get("/testimonial-id", [TestimonialController::class, "testimonialById"])->name("testimonial.id");
@@ -118,6 +128,15 @@ Route::middleware("authCheck")->group(function () {
         Route::post("/layout-footer", [LayoutController::class, "footerUpdate"])->name("layout.footer");
         Route::post("/layout-header", [LayoutController::class, "headerLogoUpdate"])->name("layout.header");
 
+        // Contact
+        Route::get("/contact", [LayoutController::class, "showContactPage"])->name("contact.index");
+        Route::get("/contact-data", [LayoutController::class, "contactData"])->name("contact.data");
+        Route::post("/contact-update", [LayoutController::class, "updateContact"])->name("contact.update");
 
+        // Hero
+        Route::get("/hero", [HeroController::class, "showHeroPage"])->name("hero.index");
+        Route::get("/hero-data", [HeroController::class, "heroData"])->name("hero.data");
+        Route::post("/hero-background", [HeroController::class, "updateBackground"])->name("hero.background");
+        Route::post("/hero-content", [HeroController::class, "updateContent"])->name("hero.content");
     });
 });

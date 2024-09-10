@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact;
 use App\Models\Layout;
 use Illuminate\Http\Request;
 
@@ -171,7 +172,6 @@ class LayoutController extends Controller
             ]);
         }
     }
-
     public function layoutData(Request $request)
     {
         $data = Layout::first();
@@ -179,5 +179,46 @@ class LayoutController extends Controller
             "status" => "success",
             "data" => $data
         ]);
+    }
+
+    public function showContactPage(){
+        return view("pages.dashboard.website.contact-page");
+    }
+
+    public function contactData(){
+        try{
+            $data = Contact::first();
+            return response()->json([
+                "status" => "success",
+                "data" => $data
+            ]);
+        } catch(\Throwable $th){
+            return response()->json([
+                "status" => "failed",
+                "message" => "Something went wrong",
+                // "error" => $th->getMessage(),
+            ]);
+        }
+    }
+
+    public function updateContact(Request $request){
+        try{
+            Contact::first()->update([
+                "email" => $request->input("email"),
+                "phone" => $request->input("phone"),
+                "address" => $request->input("address"),
+                "map" => $request->input("map"),
+            ]);
+            return response()->json([
+                "status" => "success",
+                "message" => "Updated successfully",
+            ]);
+        }catch(\Throwable $th){
+            return response()->json([
+                "status" => "failed",
+                "message" => "Something went wrong",
+                "error" => $th->getMessage(),
+            ]);
+        }
     }
 }
