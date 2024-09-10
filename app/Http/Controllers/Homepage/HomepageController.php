@@ -7,6 +7,7 @@ use App\Models\AboutItem;
 use App\Models\AboutUs;
 use App\Models\Contact;
 use App\Models\Faq;
+use App\Models\Feature;
 use App\Models\Hero;
 use App\Models\Layout;
 use App\Models\Service;
@@ -34,7 +35,8 @@ class HomepageController extends Controller
             "services" => $services,
             "testimonials" => Testimonial::all(),
             "faqs" => Faq::all(),
-            "contacts" => Contact::first()
+            "contacts" => Contact::first(),
+            "features" => Feature::all(),
         ]);
     }
 
@@ -79,4 +81,3 @@ class HomepageController extends Controller
         ]);
     }
 }
-    
