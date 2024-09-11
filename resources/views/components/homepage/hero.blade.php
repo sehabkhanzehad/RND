@@ -30,10 +30,10 @@
 
              </div>
 
-             {{-- <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
+             <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
                  <img src="{{ $hero->hover_image }}" class="img-fluid mb-3 mb-lg-0"
                      alt="">
-             </div> --}}
+             </div>
 
          </div>
      </div>
