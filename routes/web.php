@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard\Website\Aboutus\TeamController;
 use App\Http\Controllers\Dashboard\Website\FaqController;
 use App\Http\Controllers\Dashboard\Website\HeroController;
 use App\Http\Controllers\Dashboard\Website\LayoutController;
+use App\Http\Controllers\Dashboard\Website\ProjectController;
 use App\Http\Controllers\Dashboard\Website\Service\FeatureController;
 use App\Http\Controllers\Dashboard\Website\Service\ServiceController;
 use App\Http\Controllers\Dashboard\Website\TestimonialController;
@@ -21,6 +22,8 @@ Route::get("/about", [HomepageController::class, "showAboutPage"])->name("home.a
 Route::get("/services", [HomepageController::class, "showServicesPage"])->name("home.service");
 Route::get("/pricing", [HomepageController::class, "showPricingPage"])->name("home.pricing");
 Route::get("/contact", [HomepageController::class, "showContactPage"])->name("home.contact");
+Route::get("/projects", [HomepageController::class, "showProjectPage"])->name("home.project");
+Route::get("/project-details/{id}", [HomepageController::class, "showProjectDetails"])->name("home.project-details");
 
 Route::get("/sign-in", [UserController::class, "showLoginPage"])->name("user.login");
 Route::get("/send-otp", [UserController::class, "showSendOTPPage"])->name("user.send-otp");
@@ -95,6 +98,16 @@ Route::middleware("authCheck")->group(function () {
         Route::post("/service-create", [ServiceController::class, "createService"])->name("service.create");
         Route::post("/service-update", [ServiceController::class, "updateService"])->name("service.update");
         Route::post("/service-delete", [ServiceController::class, "deleteService"])->name("service.delete");
+
+        // Projects
+        Route::get("/projects", [ProjectController::class, "showProjectPage"])->name("project.index");
+        Route::get("/project-id", [ProjectController::class, "projectById"])->name("project.id");
+        Route::get("/project-data", [ProjectController::class, "projectData"])->name("project.data");
+        Route::post("/project-create", [ProjectController::class, "createProject"])->name("project.create");
+        Route::post("/project-update", [ProjectController::class, "updateProject"])->name("project.update");
+        Route::post("/project-delete", [ProjectController::class, "deleteProject"])->name("project.delete");
+
+
 
         // Feature
         Route::get("/features", [FeatureController::class, "showFeaturePage"])->name("feature.index");

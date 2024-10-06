@@ -1,8 +1,8 @@
 <div class="row">
-    <div class="col-md-10 grid-margin stretch-card m-auto">
+    <div class="col-md-12 grid-margin stretch-card m-auto">
         <div class="card">
             <div class="card-body">
-                <h6 class="card-title d-inline-block">Services</h6>
+                <h6 class="card-title d-inline-block">Projects</h6>
                 <button onclick="openModal()" type="button" class="btn btn-primary btn-icon d-inline-block float-right">
                 {{-- data-toggle="modal"
                     data-target="#addModal" --}}
@@ -13,9 +13,12 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Service Name</th>
+                                <th>Name</th>
+                                <th>Category</th>
                                 <th>Image</th>
-                                <th>Description</th>
+                                {{-- <th>Description</th> --}}
+                                <th>URL</th>
+                                <th>Published Date</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

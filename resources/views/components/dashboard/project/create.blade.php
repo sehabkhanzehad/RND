@@ -1,0 +1,75 @@
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Add Project</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form id="save-form">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="" class="form-label">Name</label>
+                                <input type="hidden" class="" id="dataId">
+                                <input type="text" class="form-control" id="name" placeholder="Enter name">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="" class="form-label">Category</label>
+                                <input type="text" class="form-control" id="category" placeholder="Enter category">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Image</label>
+                                <input id="image" type="file" name="image"
+                                    onchange="document.getElementById('blah1').src = window.URL.createObjectURL(this.files[0])"
+                                    class="form-control">
+
+                                <div class="my-3">
+                                    <img src="{{ asset("assets/dashboard/images/default_profile.png") }}" style="border-radius: 5px" id="blah1" width="80" height="80" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea id ="description" class="form-control" style="font-size: px; text-align: justify;" name="description"
+                                    rows="8"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="" class="form-label">Project URL</label>
+                                <input type="text" class="form-control" id="url"
+                                    placeholder="Enter url">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="" class="form-label">Published Date</label>
+                                <input type="date" class="form-control" id="published_date"
+                                    placeholder="Enter date">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button"class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="addBtn" onclick="addData()" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>

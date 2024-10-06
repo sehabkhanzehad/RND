@@ -50,6 +50,7 @@
                     <li><a href="{{ route('home.index') }}" class="active">Home<br></a></li>
                     <li><a href="{{ route('home.about') }}">About</a></li>
                     <li><a href="{{ route('home.service') }}">Services</a></li>
+                    <li><a href="{{ route('home.project') }}">Projects</a></li>
                     <li><a href="{{ route('home.pricing') }}">Pricing</a></li>
                     {{-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>

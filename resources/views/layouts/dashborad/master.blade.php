@@ -139,6 +139,13 @@
                     </li>
 
                     <li class="nav-item">
+                        <a href="{{ route('project.index') }}" class="nav-link">
+                            <i class="link-icon" data-feather="airplay"></i>
+                            <span class="link-title">Projects</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a href="{{ route('testimonial.index') }}" class="nav-link">
                             <i class="link-icon" data-feather="mail"></i>
                             <span class="link-title">Testimonial</span>

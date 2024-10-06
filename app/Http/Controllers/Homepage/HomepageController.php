@@ -10,6 +10,7 @@ use App\Models\Faq;
 use App\Models\Feature;
 use App\Models\Hero;
 use App\Models\Layout;
+use App\Models\Project;
 use App\Models\Service;
 use App\Models\Stat;
 use App\Models\Team;
@@ -79,6 +80,19 @@ class HomepageController extends Controller
     {
         return view("pages.homepage.contact-page", [
             "contacts" => Contact::first(),
+        ]);
+    }
+    public function showProjectPage(){
+        return view("pages.homepage.project-page", [
+            "contacts" => Contact::first(),
+            "projects" => Project::all(),
+        ]);
+    }
+    public function showProjectDetails(Request $request){
+        return view("pages.homepage.project-details", [
+            "contacts" => Contact::first(),
+            "project" => Project::find($request->route("id")),
+            "projects" => Project::latest()->take(5)->get(),
         ]);
     }
 }
