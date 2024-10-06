@@ -38,6 +38,7 @@ class HomepageController extends Controller
             "faqs" => Faq::all(),
             "contacts" => Contact::first(),
             "features" => Feature::all(),
+            "projects" => Project::all(),
         ]);
     }
 
